@@ -38,20 +38,20 @@ public class TeacherController {
     }
 
     @PostMapping
-    public ResponseEntity<TeacherReadDto> createChat(@RequestBody TeacherCreateDto teacherCreateDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.createStudent(teacherCreateDto));
+    public ResponseEntity<TeacherReadDto> createTeacher(@RequestBody TeacherCreateDto teacherCreateDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.createTeacher(teacherCreateDto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TeacherReadDto> updateChat(@PathVariable Long id, @RequestBody TeacherCreateDto teacherCreateDto) {
-        return teacherService.updateStudent(id, teacherCreateDto)
+    public ResponseEntity<TeacherReadDto> updateTeacher(@PathVariable Long id, @RequestBody TeacherCreateDto teacherCreateDto) {
+        return teacherService.updateTeacher(id, teacherCreateDto)
                 .map(chatReadDto -> ResponseEntity.ok().body(chatReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Long> deleteChat(@PathVariable Long id) {
-        if(!teacherService.deleteStudent(id)) {
+    public ResponseEntity<Long> deleteTeacher(@PathVariable Long id) {
+        if(!teacherService.deleteTeacher(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(id);

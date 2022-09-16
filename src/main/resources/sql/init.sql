@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS course
     title VARCHAR(128) NOT NULL,
     number INT NOT NULL UNIQUE,
     cost FLOAT NOT NULL,
-    teacher_id INT REFERENCES teacher (id)
+    teacher_id BIGINT REFERENCES teacher (id)
 );
 
 CREATE TABLE IF NOT EXISTS students_course

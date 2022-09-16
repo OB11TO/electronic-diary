@@ -35,7 +35,7 @@ public class TeacherService {
     }
 
     @Transactional
-    public TeacherReadDto createStudent(TeacherCreateDto teacherCreateDto) {
+    public TeacherReadDto createTeacher(TeacherCreateDto teacherCreateDto) {
         return Optional.of(teacherCreateDto)
                 .map(teacherCreateMapper::map)
                 .map(teacherRepository::save)
@@ -44,7 +44,7 @@ public class TeacherService {
     }
 
     @Transactional
-    public Optional<TeacherReadDto> updateStudent(Long id, TeacherCreateDto teacherCreateDto) {
+    public Optional<TeacherReadDto> updateTeacher(Long id, TeacherCreateDto teacherCreateDto) {
         return teacherRepository.findById(id)
                 .map(entity -> teacherCreateMapper.map(teacherCreateDto, entity))
                 .map(teacherRepository::saveAndFlush)
@@ -52,7 +52,7 @@ public class TeacherService {
     }
 
     @Transactional
-    public boolean deleteStudent(Long id) {
+    public boolean deleteTeacher(Long id) {
         return teacherRepository.findById(id)
                 .map(entity -> {
                     teacherRepository.delete(entity);
