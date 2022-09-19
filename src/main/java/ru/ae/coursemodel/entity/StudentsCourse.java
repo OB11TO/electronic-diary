@@ -40,7 +40,8 @@ public class StudentsCourse implements BaseEntity<Long>{
     @ToString.Exclude
     private Course course;
 
-    private Double grade;
+    @JoinColumn(name = "grade")
+    private Float grade;
 
     public void setStudent(Student student) {
         this.student = student;
