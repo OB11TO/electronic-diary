@@ -34,7 +34,7 @@ public class StudentsCourseCreateMapper implements Mapper<StudentsCourseCreateDt
     private void copy(StudentsCourseCreateDto fromObject, StudentsCourse toObject) {
         toObject.setStudent(getStudent(fromObject.getStudentId()));
         toObject.setCourse(getCourse(fromObject.getCourseId()));
-        toObject.setGrade(fromObject.getGrade());
+        toObject.setGrades(fromObject.getGrades());
     }
 
     private Course getCourse(Long courseId) {

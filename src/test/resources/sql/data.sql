@@ -26,17 +26,55 @@ VALUES ('Math Analysis', 111, 2500, (SELECT id FROM teacher WHERE phone = '+7978
        ('Gradle', 777, 2500, (SELECT id FROM teacher WHERE phone = '+79782106217')),
        ('Algorithm', 888, 8500, (SELECT id FROM teacher WHERE phone = '+79782106210'));
 
-INSERT INTO students_course(student_id, course_id, grade)
-VALUES ((SELECT id FROM student WHERE phone = '+79782106200'), (SELECT id FROM course WHERE id = 1), 4),--матан
-       ((SELECT id FROM student WHERE phone = '+79782106200'), (SELECT id FROM course WHERE id = 9), 3), --алгоритмы
-       ((SELECT id FROM student WHERE phone = '+79782106201'), (SELECT id FROM course WHERE id = 9), 3),
-       ((SELECT id FROM student WHERE phone = '+79782106201'), (SELECT id FROM course WHERE id = 6), 4), --спринг
-       ((SELECT id FROM student WHERE phone = '+79782106202'), (SELECT id FROM course WHERE id = 6), 5), --спринг
-       ((SELECT id FROM student WHERE phone = '+79782106202'), (SELECT id FROM course WHERE id = 4), 5),--джава
-       ((SELECT id FROM student WHERE phone = '+79782106203'), (SELECT id FROM course WHERE id = 2), 5),--самбо1
-       ((SELECT id FROM student WHERE phone = '+79782106203'), (SELECT id FROM course WHERE id = 3), 5),--самбо2
-       ((SELECT id FROM student WHERE phone = '+79782106204'), (SELECT id FROM course WHERE id = 5), 4),--сервлеты
-       ((SELECT id FROM student WHERE phone = '+79782106204'), (SELECT id FROM course WHERE id = 7), 5), --мавен
-       ((SELECT id FROM student WHERE phone = '+79782106204'), (SELECT id FROM course WHERE id = 8), 4); --грейдл
+-- INSERT INTO students_course(student_id, course_id, grade)
+-- VALUES ((SELECT id FROM student WHERE phone = '+79782106200'), (SELECT id FROM course WHERE id = 1), 4),--матан
+--        ((SELECT id FROM student WHERE phone = '+79782106200'), (SELECT id FROM course WHERE id = 9), 3), --алгоритмы
+--        ((SELECT id FROM student WHERE phone = '+79782106201'), (SELECT id FROM course WHERE id = 9), 3),
+--        ((SELECT id FROM student WHERE phone = '+79782106201'), (SELECT id FROM course WHERE id = 6), 4), --спринг
+--        ((SELECT id FROM student WHERE phone = '+79782106202'), (SELECT id FROM course WHERE id = 6), 5), --спринг
+--        ((SELECT id FROM student WHERE phone = '+79782106202'), (SELECT id FROM course WHERE id = 4), 5),--джава
+--        ((SELECT id FROM student WHERE phone = '+79782106203'), (SELECT id FROM course WHERE id = 2), 5),--самбо1
+--        ((SELECT id FROM student WHERE phone = '+79782106203'), (SELECT id FROM course WHERE id = 3), 5),--самбо2
+--        ((SELECT id FROM student WHERE phone = '+79782106204'), (SELECT id FROM course WHERE id = 5), 4),--сервлеты
+--        ((SELECT id FROM student WHERE phone = '+79782106204'), (SELECT id FROM course WHERE id = 7), 5), --мавен
+--        ((SELECT id FROM student WHERE phone = '+79782106204'), (SELECT id FROM course WHERE id = 8), 4); --грейдл
+
+INSERT INTO students_course(student_id, course_id)
+VALUES ((SELECT id FROM student WHERE phone = '+79782106200'), (SELECT id FROM course WHERE id = 1)),--матан
+       ((SELECT id FROM student WHERE phone = '+79782106200'), (SELECT id FROM course WHERE id = 9)), --алгоритмы
+       ((SELECT id FROM student WHERE phone = '+79782106201'), (SELECT id FROM course WHERE id = 9)),
+       ((SELECT id FROM student WHERE phone = '+79782106201'), (SELECT id FROM course WHERE id = 6)), --спринг
+       ((SELECT id FROM student WHERE phone = '+79782106202'), (SELECT id FROM course WHERE id = 6)), --спринг
+       ((SELECT id FROM student WHERE phone = '+79782106202'), (SELECT id FROM course WHERE id = 4)),--джава
+       ((SELECT id FROM student WHERE phone = '+79782106203'), (SELECT id FROM course WHERE id = 2)),--самбо1
+       ((SELECT id FROM student WHERE phone = '+79782106203'), (SELECT id FROM course WHERE id = 3)),--самбо2
+       ((SELECT id FROM student WHERE phone = '+79782106204'), (SELECT id FROM course WHERE id = 5)),--сервлеты
+       ((SELECT id FROM student WHERE phone = '+79782106204'), (SELECT id FROM course WHERE id = 7)), --мавен
+       ((SELECT id FROM student WHERE phone = '+79782106204'), (SELECT id FROM course WHERE id = 8));  --грейдл
+
+INSERT INTO grades(students_course_id, grade)
+VALUES (1,5),
+       (1,4),
+       (1,3),
+       (2,4),
+       (2,5),
+       (3,4),
+       (3,5),
+       (4,4),
+       (5,4),
+       (6,5),
+       (6,4),
+       (7,3),
+       (7,4),
+       (8,4),
+       (8,4),
+       (9,4),
+       (9,3),
+       (10,2),
+       (10,3),
+       (10,4),
+       (11,5);
+
+
 
 
