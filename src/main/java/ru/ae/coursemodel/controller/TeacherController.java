@@ -12,49 +12,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import ru.ae.coursemodel.dto.StudentCreateDto;
-import ru.ae.coursemodel.dto.StudentReadDto;
-import ru.ae.coursemodel.service.StudentService;
+import ru.ae.coursemodel.dto.TeacherCreateDto;
+import ru.ae.coursemodel.dto.TeacherReadDto;
+import ru.ae.coursemodel.service.TeacherService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/students")
 @RequiredArgsConstructor
-public class StudentController {
+@RequestMapping("/api/v1/teachers")
+public class TeacherController {
 
-    private final StudentService studentService;
+    private final TeacherService teacherService;
 
     @GetMapping
-    public ResponseEntity<List<StudentReadDto>> findAll() {
-        return ResponseEntity.ok(studentService.findAll());
+    public ResponseEntity<List<TeacherReadDto>> findAll() {
+        return ResponseEntity.ok(teacherService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentReadDto> findById(@PathVariable Long id) {
-        return studentService.findById(id)
-                .map(studentReadDto -> ResponseEntity.ok().body(studentReadDto))
+    public ResponseEntity<TeacherReadDto> findById(@PathVariable Long id) {
+        return teacherService.findById(id)
+                .map(TeacherReadDto -> ResponseEntity.ok().body(TeacherReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public ResponseEntity<StudentReadDto> createStudent(@RequestBody StudentCreateDto studentCreateDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(studentCreateDto));
+    public ResponseEntity<TeacherReadDto> createTeacher(@RequestBody TeacherCreateDto teacherCreateDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.createTeacher(teacherCreateDto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StudentReadDto> updateStudent(@PathVariable Long id, @RequestBody StudentCreateDto studentCreateDto) {
-        return studentService.updateStudent(id, studentCreateDto)
+    public ResponseEntity<TeacherReadDto> updateTeacher(@PathVariable Long id, @RequestBody TeacherCreateDto teacherCreateDto) {
+        return teacherService.updateTeacher(id, teacherCreateDto)
                 .map(chatReadDto -> ResponseEntity.ok().body(chatReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Long> deleteStudent(@PathVariable Long id) {
-        if(!studentService.deleteStudent(id)) {
+    public ResponseEntity<Long> deleteTeacher(@PathVariable Long id) {
+        if(!teacherService.deleteTeacher(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(id);
     }
-
 }

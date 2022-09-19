@@ -31,6 +31,7 @@ public class Course implements BaseEntity<Long> {
 
     private String title;
 
+    @JoinColumn(name = "number")
     private Integer number;
 
     private Double cost;
