@@ -27,14 +27,31 @@ CREATE TABLE IF NOT EXISTS course
     teacher_id BIGINT REFERENCES teacher (id)
 );
 
+-- CREATE TABLE IF NOT EXISTS students_course
+-- (
+--     id BIGSERIAL PRIMARY KEY,
+--     student_id BIGINT NOT NULL REFERENCES student (id) ON DELETE CASCADE,
+--     course_id BIGINT NOT NULL REFERENCES course (id) ON DELETE CASCADE,
+--     grade FLOAT NOT NULL,
+--     UNIQUE (student_id, course_id)
+-- );
+
 CREATE TABLE IF NOT EXISTS students_course
 (
     id BIGSERIAL PRIMARY KEY,
     student_id BIGINT NOT NULL REFERENCES student (id) ON DELETE CASCADE,
     course_id BIGINT NOT NULL REFERENCES course (id) ON DELETE CASCADE,
-    grade FLOAT NOT NULL,
     UNIQUE (student_id, course_id)
 );
+
+CREATE TABLE IF NOT EXISTS grades
+(
+    id BIGSERIAL,
+    students_course_id BIGINT NOT NULL REFERENCES students_course (id) ON DELETE CASCADE,
+    grade INT,
+    PRIMARY KEY (students_course_id, id)
+);
+
 
 
 

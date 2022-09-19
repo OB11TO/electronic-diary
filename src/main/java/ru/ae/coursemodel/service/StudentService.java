@@ -3,8 +3,10 @@ package ru.ae.coursemodel.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.ae.coursemodel.dto.CourseReadDto;
 import ru.ae.coursemodel.dto.StudentCreateDto;
 import ru.ae.coursemodel.dto.StudentReadDto;
+import ru.ae.coursemodel.mapper.CourseReadMapper;
 import ru.ae.coursemodel.mapper.StudentCreateMapper;
 import ru.ae.coursemodel.mapper.StudentReadMapper;
 import ru.ae.coursemodel.repository.StudentRepository;
@@ -22,6 +24,13 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final StudentReadMapper studentReadMapper;
     private final StudentCreateMapper studentCreateMapper;
+    private final CourseReadMapper courseReadMapper;
+
+    public List<CourseReadDto> findAllListCourse(Long id) {
+        return studentRepository.findByListCourse(id).stream()
+                .map(courseReadMapper::map)
+                .collect(toList());
+    }
 
     public List<StudentReadDto> findAll() {
         return studentRepository.findAll().stream()

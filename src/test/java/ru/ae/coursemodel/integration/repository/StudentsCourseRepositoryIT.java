@@ -5,14 +5,16 @@ import org.junit.jupiter.api.Test;
 import ru.ae.coursemodel.IntegrationTestBase;
 import ru.ae.coursemodel.repository.StudentsCourseRepository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RequiredArgsConstructor
-public class StudentsCourseIT extends IntegrationTestBase {
+public class StudentsCourseRepositoryIT extends IntegrationTestBase {
 
     private final StudentsCourseRepository studentsCourseRepository;
 
     @Test
     void checkFindAll() {
-        var all = studentsCourseRepository.findAll();
-        all.forEach(System.out::println);
+        var result = studentsCourseRepository.findAll();
+        assertThat(result).hasSize(11);
     }
 }

@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -40,8 +44,12 @@ public class StudentsCourse implements BaseEntity<Long>{
     @ToString.Exclude
     private Course course;
 
-    @JoinColumn(name = "grade")
-    private Float grade;
+    @ElementCollection
+    @CollectionTable(name = "grades", joinColumns = @JoinColumn(name = "students_course_id"))
+    @Builder.Default
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Grades> grades = new ArrayList<>();
 
     public void setStudent(Student student) {
         this.student = student;

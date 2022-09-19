@@ -27,7 +27,7 @@ public class StudentsCourseReadMapper implements Mapper<StudentsCourse, Students
                 object.getId(),
                 studentReadDto,
                 courseReadDto,
-                object.getGrade()
+                object.getGrades()
         );
     }
 }
