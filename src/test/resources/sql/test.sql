@@ -23,7 +23,6 @@ from (select s.id student, c.id course, avg(g.grade) gg
 where ss.student = 1;
 
 
-
 --3.Получить финальную оценку по курсу
 select avg(g.grade)
 from student s
@@ -46,9 +45,15 @@ order by s.id;
 --4.Получает |ИМЯ Teacher /
 -- Суммарное количество студентов по всем курсам /
 -- Средняя успеваемость студентов по всем курсам |
--- select t.name, count(distinct sc.student_id), avg(sc.grade)
--- from teacher t
--- join course c on t.id = c.teacher_id
--- join students_course sc on c.number = sc.course_id
--- group by t.name
+select t.name, count(distinct (s.id)), round(avg(g.grade), 2)
+from teacher t
+         join course c on t.id = c.teacher_id
+         join students_course sc on c.id = sc.course_id
+         join student s on s.id = sc.student_id
+         join grades g on sc.id = g.students_course_id
+group by t.name;
+
+
+
+
 
