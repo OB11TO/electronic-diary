@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import ru.ae.coursemodel.dto.TeacherCreateDto;
-import ru.ae.coursemodel.dto.TeacherReadDto;
+import ru.ae.coursemodel.dto.teacher.TeacherCreateDto;
+import ru.ae.coursemodel.dto.teacher.TeacherReadDto;
 import ru.ae.coursemodel.service.TeacherService;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class TeacherController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Long> deleteTeacher(@PathVariable Long id) {
-        if(!teacherService.deleteTeacher(id)) {
+        if (!teacherService.deleteTeacher(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(id);

@@ -1,8 +1,9 @@
-package ru.ae.coursemodel.mapper;
+package ru.ae.coursemodel.mapper.teacher;
 
 import org.springframework.stereotype.Component;
-import ru.ae.coursemodel.dto.TeacherReadDto;
+import ru.ae.coursemodel.dto.teacher.TeacherReadDto;
 import ru.ae.coursemodel.entity.Teacher;
+import ru.ae.coursemodel.mapper.Mapper;
 
 @Component
 public class TeacherReadMapper implements Mapper<Teacher, TeacherReadDto> {

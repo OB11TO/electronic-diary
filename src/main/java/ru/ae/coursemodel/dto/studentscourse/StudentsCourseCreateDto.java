@@ -1,4 +1,4 @@
-package ru.ae.coursemodel.dto;
+package ru.ae.coursemodel.dto.studentscourse;
 
 import lombok.Value;
 import ru.ae.coursemodel.entity.Grades;

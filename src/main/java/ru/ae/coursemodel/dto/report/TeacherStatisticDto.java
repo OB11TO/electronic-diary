@@ -1,4 +1,4 @@
-package ru.ae.coursemodel.dto;
+package ru.ae.coursemodel.dto.report;
 
 import lombok.Value;
 

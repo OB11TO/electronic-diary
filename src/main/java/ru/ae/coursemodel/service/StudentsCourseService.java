@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ae.coursemodel.dto.StudentsCourseCreateDto;
-import ru.ae.coursemodel.dto.StudentsCourseReadDto;
-import ru.ae.coursemodel.mapper.StudentsCourseCreateMapper;
-import ru.ae.coursemodel.mapper.StudentsCourseReadMapper;
+import ru.ae.coursemodel.dto.studentscourse.StudentsCourseCreateDto;
+import ru.ae.coursemodel.dto.studentscourse.StudentsCourseReadDto;
+import ru.ae.coursemodel.mapper.studentcourse.StudentsCourseCreateMapper;
+import ru.ae.coursemodel.mapper.studentcourse.StudentsCourseReadMapper;
 import ru.ae.coursemodel.repository.StudentsCourseRepository;
 
 import java.util.List;

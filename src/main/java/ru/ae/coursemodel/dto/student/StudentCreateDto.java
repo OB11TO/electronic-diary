@@ -1,10 +1,9 @@
-package ru.ae.coursemodel.dto;
+package ru.ae.coursemodel.dto.student;
 
 import lombok.Value;
 
 @Value
-public class StudentReadDto {
-    Long id;
+public class StudentCreateDto {
     String name;
     String address;
     String phone;
