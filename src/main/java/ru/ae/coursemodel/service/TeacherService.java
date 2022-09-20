@@ -3,10 +3,10 @@ package ru.ae.coursemodel.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ae.coursemodel.dto.TeacherCreateDto;
-import ru.ae.coursemodel.dto.TeacherReadDto;
-import ru.ae.coursemodel.mapper.TeacherCreateMapper;
-import ru.ae.coursemodel.mapper.TeacherReadMapper;
+import ru.ae.coursemodel.dto.teacher.TeacherCreateDto;
+import ru.ae.coursemodel.dto.teacher.TeacherReadDto;
+import ru.ae.coursemodel.mapper.teacher.TeacherCreateMapper;
+import ru.ae.coursemodel.mapper.teacher.TeacherReadMapper;
 import ru.ae.coursemodel.repository.TeacherRepository;
 
 import java.util.List;

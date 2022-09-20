@@ -1,6 +1,7 @@
-package ru.ae.coursemodel.dto;
+package ru.ae.coursemodel.dto.course;
 
 import lombok.Value;
+import ru.ae.coursemodel.dto.teacher.TeacherReadDto;
 
 @Value
 public class CourseReadDto {

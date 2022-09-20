@@ -1,11 +1,12 @@
-package ru.ae.coursemodel.mapper;
+package ru.ae.coursemodel.mapper.teacher;
 
 import org.springframework.stereotype.Component;
-import ru.ae.coursemodel.dto.TeacherCreateDto;
+import ru.ae.coursemodel.dto.teacher.TeacherCreateDto;
 import ru.ae.coursemodel.entity.Teacher;
+import ru.ae.coursemodel.mapper.Mapper;
 
 @Component
-public class TeacherCreateMapper implements Mapper<TeacherCreateDto, Teacher>{
+public class TeacherCreateMapper implements Mapper<TeacherCreateDto, Teacher> {
 
 
     @Override

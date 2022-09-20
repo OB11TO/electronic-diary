@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import ru.ae.coursemodel.dto.StudentsCourseCreateDto;
-import ru.ae.coursemodel.dto.StudentsCourseReadDto;
+import ru.ae.coursemodel.dto.studentscourse.StudentsCourseCreateDto;
+import ru.ae.coursemodel.dto.studentscourse.StudentsCourseReadDto;
 import ru.ae.coursemodel.service.StudentsCourseService;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class StudentsCourseController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Long> deleteUserChat(@PathVariable Long id) {
-        if(!studentsCourseService.deleteStudentsCourse(id)) {
+        if (!studentsCourseService.deleteStudentsCourse(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(id);

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.ae.coursemodel.dto.TeacherStatisticDto;
+import ru.ae.coursemodel.dto.report.TeacherStatisticDto;
 
 import javax.persistence.ColumnResult;
 import javax.persistence.ConstructorResult;

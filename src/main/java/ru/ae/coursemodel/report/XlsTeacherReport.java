@@ -6,7 +6,7 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
-import ru.ae.coursemodel.dto.TeacherStatisticDto;
+import ru.ae.coursemodel.dto.report.TeacherStatisticDto;
 import ru.ae.coursemodel.repository.TeacherRepository;
 
 import java.io.ByteArrayOutputStream;

@@ -1,11 +1,12 @@
-package ru.ae.coursemodel.mapper;
+package ru.ae.coursemodel.mapper.studentcourse;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.ae.coursemodel.dto.StudentsCourseCreateDto;
+import ru.ae.coursemodel.dto.studentscourse.StudentsCourseCreateDto;
 import ru.ae.coursemodel.entity.Course;
 import ru.ae.coursemodel.entity.Student;
 import ru.ae.coursemodel.entity.StudentsCourse;
+import ru.ae.coursemodel.mapper.Mapper;
 import ru.ae.coursemodel.repository.CourseRepository;
 import ru.ae.coursemodel.repository.StudentRepository;
 

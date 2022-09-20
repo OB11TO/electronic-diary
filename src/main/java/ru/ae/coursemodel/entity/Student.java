@@ -23,7 +23,7 @@ import java.util.List;
 @Entity
 @Builder
 @Table(name = "student")
-public class Student implements BaseEntity<Long>{
+public class Student implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class Student implements BaseEntity<Long>{
 
     private String phone;
 
-    private  String email;
+    private String email;
 
     @Column(name = "gradebook_number")
     private Integer gradeBookNumber;

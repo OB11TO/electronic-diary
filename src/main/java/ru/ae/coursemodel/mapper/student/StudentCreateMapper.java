@@ -1,8 +1,9 @@
-package ru.ae.coursemodel.mapper;
+package ru.ae.coursemodel.mapper.student;
 
 import org.springframework.stereotype.Component;
-import ru.ae.coursemodel.dto.StudentCreateDto;
+import ru.ae.coursemodel.dto.student.StudentCreateDto;
 import ru.ae.coursemodel.entity.Student;
+import ru.ae.coursemodel.mapper.Mapper;
 
 @Component
 public class StudentCreateMapper implements Mapper<StudentCreateDto, Student> {

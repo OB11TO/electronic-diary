@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import ru.ae.coursemodel.dto.CourseReadDto;
-import ru.ae.coursemodel.dto.StudentCreateDto;
-import ru.ae.coursemodel.dto.StudentReadDto;
+import ru.ae.coursemodel.dto.course.CourseReadDto;
+import ru.ae.coursemodel.dto.student.StudentCreateDto;
+import ru.ae.coursemodel.dto.student.StudentReadDto;
 import ru.ae.coursemodel.service.StudentService;
 
 import java.util.List;
