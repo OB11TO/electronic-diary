@@ -26,6 +26,21 @@ public class StudentController {
 
     private final StudentService studentService;
 
+    @GetMapping("/student/{idStudent}/average-grade")
+    public ResponseEntity<Double> findByAvgCurrentGrade(@PathVariable Long idStudent) {
+        return studentService.findByAvgCurrentGrade(idStudent)
+                .map(grade -> ResponseEntity.ok().body(grade))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/student/{idStudent}/course/{idCourse}/final-grade")
+    public ResponseEntity<Double> findByFinalGradeOfCourse(@PathVariable Long idStudent,
+                                                           @PathVariable Long idCourse) {
+        return studentService.findByFinalGradeOfCourse(idStudent, idCourse)
+                .map(grade -> ResponseEntity.ok().body(grade))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
     @GetMapping("/student{id}/courses")
     public ResponseEntity<List<CourseReadDto>> findAllListCourse(@PathVariable Long id) {
         return ResponseEntity.ok(studentService.findAllListCourse(id));
@@ -57,7 +72,7 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Long> deleteStudent(@PathVariable Long id) {
-        if(!studentService.deleteStudent(id)) {
+        if (!studentService.deleteStudent(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(id);

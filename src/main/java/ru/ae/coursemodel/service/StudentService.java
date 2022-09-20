@@ -26,6 +26,14 @@ public class StudentService {
     private final StudentCreateMapper studentCreateMapper;
     private final CourseReadMapper courseReadMapper;
 
+    public Optional<Double> findByAvgCurrentGrade(Long idStudent) {
+        return studentRepository.findByAvgCurrentGrade(idStudent);
+    }
+
+    public Optional<Double> findByFinalGradeOfCourse(Long idStudent, Long idCourse) {
+        return studentRepository.findByFinalGradeOfCourse(idStudent, idCourse);
+    }
+
     public List<CourseReadDto> findAllListCourse(Long id) {
         return studentRepository.findByListCourse(id).stream()
                 .map(courseReadMapper::map)
