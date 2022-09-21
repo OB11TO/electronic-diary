@@ -1,6 +1,7 @@
 package ru.ae.coursemodel.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ae.coursemodel.dto.teacher.TeacherCreateDto;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -24,18 +26,21 @@ public class TeacherService {
     private final TeacherCreateMapper teacherCreateMapper;
 
     public List<TeacherReadDto> findAll() {
+        log.info("Get all teachers");
         return teacherRepository.findAll().stream()
                 .map(teacherReadMapper::map)
                 .collect(toList());
     }
 
     public Optional<TeacherReadDto> findById(Long id) {
+        log.info("Get teacher with id : {}", id);
         return teacherRepository.findById(id)
                 .map(teacherReadMapper::map);
     }
 
     @Transactional
     public TeacherReadDto createTeacher(TeacherCreateDto teacherCreateDto) {
+        log.info("Create teacher : {}", teacherCreateDto);
         return Optional.of(teacherCreateDto)
                 .map(teacherCreateMapper::map)
                 .map(teacherRepository::save)
@@ -45,6 +50,7 @@ public class TeacherService {
 
     @Transactional
     public Optional<TeacherReadDto> updateTeacher(Long id, TeacherCreateDto teacherCreateDto) {
+        log.info("Update teacher with id : {}, data : {}", id, teacherCreateDto);
         return teacherRepository.findById(id)
                 .map(entity -> teacherCreateMapper.map(teacherCreateDto, entity))
                 .map(teacherRepository::saveAndFlush)
@@ -53,6 +59,7 @@ public class TeacherService {
 
     @Transactional
     public boolean deleteTeacher(Long id) {
+        log.info("Remove teacher with id : {}", id);
         return teacherRepository.findById(id)
                 .map(entity -> {
                     teacherRepository.delete(entity);
