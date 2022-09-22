@@ -2,8 +2,10 @@ package ru.ae.coursemodel.service;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 import ru.ae.coursemodel.dto.studentscourse.StudentsCourseCreateDto;
 import ru.ae.coursemodel.dto.studentscourse.StudentsCourseReadDto;
 import ru.ae.coursemodel.mapper.studentcourse.StudentsCourseCreateMapper;
@@ -45,7 +47,7 @@ public class StudentsCourseService {
                 .map(studentsCourseCreateMapper::map)
                 .map(studentsCourseRepository::save)
                 .map(studentsCourseReadMapper::map)
-                .orElseThrow();
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Transactional
