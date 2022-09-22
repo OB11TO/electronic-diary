@@ -26,18 +26,21 @@ public class StudentsCourseService {
     private final StudentsCourseCreateMapper studentsCourseCreateMapper;
 
     public List<StudentsCourseReadDto> findAll() {
+        log.info("Get all StudentsCourse");
         return studentsCourseRepository.findAll().stream()
                 .map(studentsCourseReadMapper::map)
                 .collect(toList());
     }
 
     public Optional<StudentsCourseReadDto> findById(Long id) {
+        log.info("Get StudentsCourse with id : {}", id);
         return studentsCourseRepository.findById(id)
                 .map(studentsCourseReadMapper::map);
     }
 
     @Transactional
     public StudentsCourseReadDto saveStudentsCourse(StudentsCourseCreateDto studentsCourseCreateDto) {
+        log.info("Create StudentsCourse : {}", studentsCourseCreateDto);
         return Optional.of(studentsCourseCreateDto)
                 .map(studentsCourseCreateMapper::map)
                 .map(studentsCourseRepository::save)
@@ -47,6 +50,7 @@ public class StudentsCourseService {
 
     @Transactional
     public Optional<StudentsCourseReadDto> updateStudentsCourse(Long id, StudentsCourseCreateDto studentsCourseCreateDto) {
+        log.info("Update StudentsCourse with id : {}, data : {}", id, studentsCourseCreateDto);
         return studentsCourseRepository.findById(id)
                 .map(entity -> studentsCourseCreateMapper.map(studentsCourseCreateDto, entity))
                 .map(studentsCourseRepository::saveAndFlush)
@@ -55,6 +59,7 @@ public class StudentsCourseService {
 
     @Transactional
     public boolean deleteStudentsCourse(Long id) {
+        log.info("Remove StudentsCourse with id : {}", id);
         return studentsCourseRepository.findById(id)
                 .map(entity -> {
                     studentsCourseRepository.delete(entity);

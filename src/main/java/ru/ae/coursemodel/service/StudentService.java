@@ -1,6 +1,7 @@
 package ru.ae.coursemodel.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ae.coursemodel.dto.course.CourseReadDto;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -27,32 +29,38 @@ public class StudentService {
     private final CourseReadMapper courseReadMapper;
 
     public Optional<Double> findByAvgCurrentGrade(Long idStudent) {
+        log.info("Get the current average score for all courses a student with id : {}", idStudent);
         return studentRepository.findByAvgCurrentGrade(idStudent);
     }
 
     public Optional<Double> findByFinalGradeOfCourse(Long idStudent, Long idCourse) {
+        log.info("Get a final grade from a student with id : {} on the course with id :{}", idStudent, idCourse);
         return studentRepository.findByFinalGradeOfCourse(idStudent, idCourse);
     }
 
     public List<CourseReadDto> findAllListCourse(Long id) {
+        log.info("Get list of courses attended by the student with id : {}", id);
         return studentRepository.findByListCourse(id).stream()
                 .map(courseReadMapper::map)
                 .collect(toList());
     }
 
     public List<StudentReadDto> findAll() {
+        log.info("Get all students");
         return studentRepository.findAll().stream()
                 .map(studentReadMapper::map)
                 .collect(toList());
     }
 
     public Optional<StudentReadDto> findById(Long id) {
+        log.info("Get student with id : {}", id);
         return studentRepository.findById(id)
                 .map(studentReadMapper::map);
     }
 
     @Transactional
     public StudentReadDto createStudent(StudentCreateDto studentCreateDto) {
+        log.info("Create student : {}", studentCreateDto);
         return Optional.of(studentCreateDto)
                 .map(studentCreateMapper::map)
                 .map(studentRepository::save)
@@ -62,6 +70,7 @@ public class StudentService {
 
     @Transactional
     public Optional<StudentReadDto> updateStudent(Long id, StudentCreateDto studentCreateDto) {
+        log.info("Update student with id : {}, data : {}", id, studentCreateDto);
         return studentRepository.findById(id)
                 .map(entity -> studentCreateMapper.map(studentCreateDto, entity))
                 .map(studentRepository::saveAndFlush)
@@ -70,6 +79,7 @@ public class StudentService {
 
     @Transactional
     public boolean deleteStudent(Long id) {
+        log.info("Remove student with id : {}", id);
         return studentRepository.findById(id)
                 .map(entity -> {
                     studentRepository.delete(entity);

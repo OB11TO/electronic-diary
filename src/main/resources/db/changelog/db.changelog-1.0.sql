@@ -49,9 +49,3 @@ CREATE TABLE IF NOT EXISTS grades
     grade              INT,
     PRIMARY KEY (students_course_id, id)
 );
-
-
-
-
-
-
