@@ -52,8 +52,3 @@ from teacher t
          join student s on s.id = sc.student_id
          join grades g on sc.id = g.students_course_id
 group by t.name;
-
-
-
-
-

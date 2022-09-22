@@ -41,6 +41,4 @@ public class CourseCreateMapper implements Mapper<CourseCreateDto, Course> {
                 .flatMap(teacherRepository::findById)
                 .orElse(null);
     }
-
-
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teachers</title>
+</head>
+<body>
+<div th:each="teacher : ${teachers}">
+    <a th:href="@{'/teachers/' + ${teacher.id}}" th:text="|${teacher.id}.
+                                                        ${teacher.name}/
+                                                        ${teacher.address}/
+                                                        ${teacher.phone}/
+                                                        ${teacher.payment}.|">Teacher</a>
+</div>
+
+<form action="/teachers/create">
+    <button type="submit">Create Teacher</button>
+</form>
+</body>
+</html>

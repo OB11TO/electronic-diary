@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher</title>
+</head>
+<body>
+<form th:action="@{/teachers/{teacherId}/update(teacherId=${teacher.id})}" method="post" th:object="${teacher}">
+    <label for="name">Name:
+        <input id="name" type="text" name="name" th:value="*{name}">
+    </label><br>
+    <label for="address">Address:
+        <input id="address" type="text" name="address" th:value="*{address}">
+    </label><br>
+    <label for="phone">Phone:
+        <input id="phone" type="text" name="phone" th:value="*{phone}">
+    </label><br>
+    <label for="payment">Payment:
+        <input id="payment" type="number" name="payment" th:value="*{payment}">
+    </label><br>
+
+    <button type="submit">Update</button>
+</form>
+
+<form th:action="@{/teachers/{teacherId}/delete(teacherId=${teacher.id})}" method="post">
+    <button type="submit">Remove</button>
+</form>
+</body>
+</html>
