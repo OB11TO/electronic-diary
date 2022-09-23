@@ -70,8 +70,13 @@ public class XlsTeacherReport {
                     .setCellValue(teacherStatisticDto.getTeacherName());
             row.createCell(1)
                     .setCellValue(teacherStatisticDto.getStudentCounts());
-            row.createCell(2)
-                    .setCellValue(teacherStatisticDto.getAvgCurrentGradeAllCourse());
+            if (teacherStatisticDto.getAvgCurrentGradeAllCourse() == null) {
+                row.createCell(2)
+                        .setCellValue(0);
+            } else {
+                row.createCell(2)
+                        .setCellValue(teacherStatisticDto.getAvgCurrentGradeAllCourse());
+            }
         }
     }
 }

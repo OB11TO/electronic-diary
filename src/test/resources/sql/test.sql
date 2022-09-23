@@ -47,8 +47,8 @@ order by s.id;
 -- Средняя успеваемость студентов по всем курсам |
 select t.name, count(distinct (s.id)), round(avg(g.grade), 2)
 from teacher t
-         join course c on t.id = c.teacher_id
-         join students_course sc on c.id = sc.course_id
-         join student s on s.id = sc.student_id
-         join grades g on sc.id = g.students_course_id
+         left join course c on t.id = c.teacher_id
+        left join students_course sc on c.id = sc.course_id
+        left join student s on s.id = sc.student_id
+         left join grades g on sc.id = g.students_course_id
 group by t.name;

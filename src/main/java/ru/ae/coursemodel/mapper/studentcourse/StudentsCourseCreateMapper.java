@@ -1,7 +1,9 @@
 package ru.ae.coursemodel.mapper.studentcourse;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 import ru.ae.coursemodel.dto.studentscourse.StudentsCourseCreateDto;
 import ru.ae.coursemodel.entity.Course;
 import ru.ae.coursemodel.entity.Student;
@@ -41,12 +43,12 @@ public class StudentsCourseCreateMapper implements Mapper<StudentsCourseCreateDt
     private Course getCourse(Long courseId) {
         return Optional.ofNullable(courseId)
                 .flatMap(courseRepository::findById)
-                .orElseThrow();
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     private Student getStudent(Long studentId) {
         return Optional.ofNullable(studentId)
                 .flatMap(studentRepository::findById)
-                .orElseThrow();
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 }
