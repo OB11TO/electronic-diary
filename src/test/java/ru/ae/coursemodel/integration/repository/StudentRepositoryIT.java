@@ -6,6 +6,8 @@ import ru.ae.coursemodel.IntegrationTestBase;
 import ru.ae.coursemodel.repository.StudentRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RequiredArgsConstructor
 public class StudentRepositoryIT extends IntegrationTestBase {
@@ -19,18 +21,26 @@ public class StudentRepositoryIT extends IntegrationTestBase {
     @Test
     void checkFindByAvgCurrentGrade() {
         var byCurrentGrade = studentRepository.findByAvgCurrentGrade(STUDENT_ID_4);
-        System.out.println(byCurrentGrade);
+        assertTrue(byCurrentGrade.isPresent());
+        byCurrentGrade.ifPresent(grade -> assertEquals(grade, 3.75));
     }
 
     @Test
     void checkFindByFinalGradeOfCourse() {
         var avgGrade = studentRepository.findByFinalGradeOfCourse(STUDENT_ID_1, COURSE_ID_1);
-        System.out.println(avgGrade);
+        assertTrue(avgGrade.isPresent());
+        avgGrade.ifPresent(grade -> assertEquals(grade, 4.5));
     }
 
     @Test
     void checkFindAlListCourse() {
         var result = studentRepository.findByListCourse(STUDENT_ID_1);
         assertThat(result).hasSize(2);
+    }
+
+    @Test
+    void checkFindAll() {
+        var result = studentRepository.findAll();
+        assertThat(result).hasSize(5);
     }
 }
