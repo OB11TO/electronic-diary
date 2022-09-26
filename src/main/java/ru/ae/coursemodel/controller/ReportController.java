@@ -1,5 +1,7 @@
 package ru.ae.coursemodel.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +16,12 @@ import java.time.format.DateTimeFormatter;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/reports")
+@Tag(name = "Report", description = "отчет")
 public class ReportController {
 
     private final TeacherReportService teacherReportService;
 
+    @Operation(summary = "Получить отчет по загрузке преподавательского состава")
     @GetMapping
     public ResponseEntity<byte[]> generateTeacherWorkLoadReport() {
         var httpHeaders = new HttpHeaders();
