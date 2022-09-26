@@ -1,5 +1,7 @@
 package ru.ae.coursemodel.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +24,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/students")
 @RequiredArgsConstructor
+@Tag(name = "Student", description = "студенты")
 public class StudentController {
 
     private final StudentService studentService;
 
+    @Operation(summary = "Получить среднюю оценку по всем курсам у студента по его id")
     @GetMapping("/student/{idStudent}/average-grade")
     public ResponseEntity<Double> findByAvgCurrentGrade(@PathVariable Long idStudent) {
         return studentService.findByAvgCurrentGrade(idStudent)
@@ -33,6 +37,7 @@ public class StudentController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    @Operation(summary = "Получить финальную оценку за конкретный курс")
     @GetMapping("/student/{idStudent}/course/{idCourse}/final-grade")
     public ResponseEntity<Double> findByFinalGradeOfCourse(@PathVariable Long idStudent,
                                                            @PathVariable Long idCourse) {
@@ -41,16 +46,19 @@ public class StudentController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    @Operation(summary = "Получить список курсов на которых учится студент")
     @GetMapping("/student{id}/courses")
     public ResponseEntity<List<CourseReadDto>> findAllListCourse(@PathVariable Long id) {
         return ResponseEntity.ok(studentService.findAllListCourse(id));
     }
 
+    @Operation(summary = "Получить всех студентов")
     @GetMapping
     public ResponseEntity<List<StudentReadDto>> findAll() {
         return ResponseEntity.ok(studentService.findAll());
     }
 
+    @Operation(summary = "Получить студента по его id")
     @GetMapping("/{id}")
     public ResponseEntity<StudentReadDto> findById(@PathVariable Long id) {
         return studentService.findById(id)
@@ -58,11 +66,13 @@ public class StudentController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    @Operation(summary = "Сохранить нового студента")
     @PostMapping
     public ResponseEntity<StudentReadDto> createStudent(@RequestBody StudentCreateDto studentCreateDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(studentCreateDto));
     }
 
+    @Operation(summary = "Изменить данные о конкретном студенте по его id")
     @PutMapping("/{id}")
     public ResponseEntity<StudentReadDto> updateStudent(@PathVariable Long id, @RequestBody StudentCreateDto studentCreateDto) {
         return studentService.updateStudent(id, studentCreateDto)
@@ -70,6 +80,7 @@ public class StudentController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    @Operation(summary = "Удалить конкретного студента по его id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Long> deleteStudent(@PathVariable Long id) {
         if (!studentService.deleteStudent(id)) {
