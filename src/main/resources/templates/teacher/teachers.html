@@ -7,17 +7,25 @@
 <body>
 <form action="/teachers">
     <label for="name">Name:
-        <input id="name" type="text" name="name">
+        <input id="name" type="text" name="name" th:value="${filter.getName()}">
     </label>
     <label for="phone">Phone:
-        <input id="phone" type="text" name="phone">
+        <input id="phone" type="text" name="phone" th:value="${filter.getPhone()}">
     </label>
     <label for="payment">Payment:
-        <input id="payment" type="number" name="payment">
+        <input id="payment" type="number" name="payment" th:value="${filter.getPayment()}">
     </label>
+    <div>
+        <label for="page">Page:
+            <input id="page" type="number" name="page" th:value="${teachers.metadata.page}">
+        </label>
+        <label for="size">Size:
+            <input id="size" type="number" name="size" th:value="${teachers.metadata.size}">
+        </label>
+    </div>
     <button type="submit">Filter</button>
 </form>
-<div th:each="teacher : ${teachers}">
+<div th:each="teacher : ${teachers.content}">
     <a th:href="@{'/teachers/' + ${teacher.id}}" th:text="|${teacher.id}.
                                                         ${teacher.name}/
                                                         ${teacher.address}/

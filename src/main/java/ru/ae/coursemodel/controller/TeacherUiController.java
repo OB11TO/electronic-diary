@@ -1,6 +1,7 @@
 package ru.ae.coursemodel.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
+import ru.ae.coursemodel.dto.PageResponse;
 import ru.ae.coursemodel.dto.teacher.TeacherCreateDto;
 import ru.ae.coursemodel.dto.teacher.TeacherFilter;
 import ru.ae.coursemodel.service.TeacherService;
@@ -22,8 +24,10 @@ public class TeacherUiController {
     private final TeacherService teacherService;
 
     @GetMapping
-    public String findAll(Model model, TeacherFilter filter) {
-        model.addAttribute("teachers", teacherService.findAll(filter));
+    public String findAll(Model model, TeacherFilter filter, Pageable pageable) {
+        var page = teacherService.findAll(filter, pageable);
+        model.addAttribute("teachers", PageResponse.of(page));
+        model.addAttribute("filter", filter);
         return "teacher/teachers";
     }
 

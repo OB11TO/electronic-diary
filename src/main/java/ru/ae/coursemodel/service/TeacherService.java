@@ -2,6 +2,8 @@ package ru.ae.coursemodel.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ae.coursemodel.dto.teacher.TeacherCreateDto;
@@ -10,11 +12,13 @@ import ru.ae.coursemodel.dto.teacher.TeacherReadDto;
 import ru.ae.coursemodel.mapper.teacher.TeacherCreateMapper;
 import ru.ae.coursemodel.mapper.teacher.TeacherReadMapper;
 import ru.ae.coursemodel.repository.TeacherRepository;
+import ru.ae.coursemodel.repository.querydsl.QPredicates;
 
 import java.util.List;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
+import static ru.ae.coursemodel.entity.QTeacher.teacher;
 
 @Slf4j
 @Service
@@ -31,6 +35,17 @@ public class TeacherService {
         return teacherRepository.findAllByFilter(filter).stream()
                 .map(teacherReadMapper::map)
                 .collect(toList());
+    }
+
+    public Page<TeacherReadDto> findAll(TeacherFilter filter, Pageable pageable) {
+        var predicate = QPredicates.builder()
+                .add(filter.getName(), teacher.name::containsIgnoreCase)
+                .add(filter.getPhone(), teacher.phone::containsIgnoreCase)
+                .add(filter.getPayment(), teacher.payment::eq)
+                .build();
+        log.info("Get all teachers + filter + pageable");
+        return teacherRepository.findAll(predicate, pageable)
+                .map(teacherReadMapper::map);
     }
 
     public Optional<TeacherReadDto> findById(Long id) {
