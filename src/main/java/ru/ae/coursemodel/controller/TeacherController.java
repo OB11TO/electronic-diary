@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,13 +46,14 @@ public class TeacherController {
 
     @Operation(summary = "Сохранить нового профессора")
     @PostMapping
-    public ResponseEntity<TeacherReadDto> createTeacher(@RequestBody TeacherCreateDto teacherCreateDto) {
+    public ResponseEntity<TeacherReadDto> createTeacher(@Validated @RequestBody TeacherCreateDto teacherCreateDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.createTeacher(teacherCreateDto));
     }
 
     @Operation(summary = "Изменить данные о профессоре по id")
     @PutMapping("/{id}")
-    public ResponseEntity<TeacherReadDto> updateTeacher(@PathVariable Long id, @RequestBody TeacherCreateDto teacherCreateDto) {
+    public ResponseEntity<TeacherReadDto> updateTeacher(@PathVariable Long id,
+                                                        @Validated @RequestBody TeacherCreateDto teacherCreateDto) {
         return teacherService.updateTeacher(id, teacherCreateDto)
                 .map(chatReadDto -> ResponseEntity.ok().body(chatReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
