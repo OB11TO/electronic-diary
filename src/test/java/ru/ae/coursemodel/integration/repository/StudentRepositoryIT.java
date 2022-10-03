@@ -3,7 +3,9 @@ package ru.ae.coursemodel.integration.repository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import ru.ae.coursemodel.IntegrationTestBase;
+import ru.ae.coursemodel.dto.student.StudentFilter;
 import ru.ae.coursemodel.repository.StudentRepository;
+import ru.ae.coursemodel.service.StudentService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,6 +19,25 @@ public class StudentRepositoryIT extends IntegrationTestBase {
     private final static Long STUDENT_ID_5 = 5L;
     private final static Long COURSE_ID_1 = 9L;
     private final StudentRepository studentRepository;
+    private final StudentService studentService;
+
+    @Test
+    void checkQueryDslFilter2() {
+        var filter = new StudentFilter(
+                "a", null, null
+        );
+        var students = studentService.findAll(filter);
+        assertThat(students).hasSize(2);
+    }
+
+    @Test
+    void checkQueryDslFilter() {
+        var filter = new StudentFilter(
+                "a", null, null
+        );
+        var students = studentRepository.findAllByFilter(filter);
+        assertThat(students).hasSize(2);
+    }
 
     @Test
     void checkFindByAvgCurrentGrade() {

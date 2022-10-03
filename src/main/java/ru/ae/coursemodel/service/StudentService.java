@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ae.coursemodel.dto.course.CourseReadDto;
 import ru.ae.coursemodel.dto.student.StudentCreateDto;
+import ru.ae.coursemodel.dto.student.StudentFilter;
 import ru.ae.coursemodel.dto.student.StudentReadDto;
 import ru.ae.coursemodel.mapper.course.CourseReadMapper;
 import ru.ae.coursemodel.mapper.student.StudentCreateMapper;
@@ -48,6 +49,13 @@ public class StudentService {
     public List<StudentReadDto> findAll() {
         log.info("Get all students");
         return studentRepository.findAll().stream()
+                .map(studentReadMapper::map)
+                .collect(toList());
+    }
+
+    public List<StudentReadDto> findAll(StudentFilter studentFilter) {
+        log.info("Get all filter students");
+        return studentRepository.findAllByFilter(studentFilter).stream()
                 .map(studentReadMapper::map)
                 .collect(toList());
     }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import ru.ae.coursemodel.dto.course.CourseReadDto;
 import ru.ae.coursemodel.dto.student.StudentCreateDto;
+import ru.ae.coursemodel.dto.student.StudentFilter;
 import ru.ae.coursemodel.dto.student.StudentReadDto;
 import ru.ae.coursemodel.service.StudentService;
 
@@ -56,6 +57,12 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<List<StudentReadDto>> findAll() {
         return ResponseEntity.ok(studentService.findAll());
+    }
+
+    @Operation(summary = "Получить всех студентов с фильтрацией")
+    @GetMapping("/filter")
+    public List<StudentReadDto> findAll(StudentFilter filter) {
+        return studentService.findAll(filter);
     }
 
     @Operation(summary = "Получить студента по его id")
