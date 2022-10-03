@@ -9,7 +9,7 @@ import ru.ae.coursemodel.entity.Teacher;
 import java.util.List;
 
 @Repository
-public interface TeacherRepository extends JpaRepository<Teacher, Long> {
+public interface TeacherRepository extends JpaRepository<Teacher, Long>, FilterTeacherRepository {
 
     @Query(nativeQuery = true)
     List<TeacherStatisticDto> findAllTeacherStatistics();

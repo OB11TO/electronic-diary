@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ae.coursemodel.dto.teacher.TeacherCreateDto;
+import ru.ae.coursemodel.dto.teacher.TeacherFilter;
 import ru.ae.coursemodel.dto.teacher.TeacherReadDto;
 import ru.ae.coursemodel.mapper.teacher.TeacherCreateMapper;
 import ru.ae.coursemodel.mapper.teacher.TeacherReadMapper;
@@ -25,9 +26,9 @@ public class TeacherService {
     private final TeacherReadMapper teacherReadMapper;
     private final TeacherCreateMapper teacherCreateMapper;
 
-    public List<TeacherReadDto> findAll() {
+    public List<TeacherReadDto> findAll(TeacherFilter filter) {
         log.info("Get all teachers");
-        return teacherRepository.findAll().stream()
+        return teacherRepository.findAllByFilter(filter).stream()
                 .map(teacherReadMapper::map)
                 .collect(toList());
     }

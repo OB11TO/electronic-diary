@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 import ru.ae.coursemodel.dto.teacher.TeacherCreateDto;
+import ru.ae.coursemodel.dto.teacher.TeacherFilter;
 import ru.ae.coursemodel.service.TeacherService;
 
 @Controller
@@ -21,8 +22,8 @@ public class TeacherUiController {
     private final TeacherService teacherService;
 
     @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("teachers", teacherService.findAll());
+    public String findAll(Model model, TeacherFilter filter) {
+        model.addAttribute("teachers", teacherService.findAll(filter));
         return "teacher/teachers";
     }
 

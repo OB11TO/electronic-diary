@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import ru.ae.coursemodel.dto.teacher.TeacherCreateDto;
+import ru.ae.coursemodel.dto.teacher.TeacherFilter;
 import ru.ae.coursemodel.dto.teacher.TeacherReadDto;
 import ru.ae.coursemodel.service.TeacherService;
 
@@ -30,8 +31,8 @@ public class TeacherController {
 
     @Operation(summary = "Получить всех профессоров")
     @GetMapping
-    public ResponseEntity<List<TeacherReadDto>> findAll() {
-        return ResponseEntity.ok(teacherService.findAll());
+    public ResponseEntity<List<TeacherReadDto>> findAll(TeacherFilter filter) {
+        return ResponseEntity.ok(teacherService.findAll(filter));
     }
 
     @Operation(summary = "Получить профессора по id")
