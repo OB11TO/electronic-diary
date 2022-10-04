@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,13 +45,14 @@ public class StudentsCourseController {
 
     @Operation(summary = "Добавить студента на курс")
     @PostMapping
-    public ResponseEntity<StudentsCourseReadDto> saveStudentsCourse(@RequestBody StudentsCourseCreateDto studentsCourseCreateDto) {
+    public ResponseEntity<StudentsCourseReadDto> saveStudentsCourse(@Validated @RequestBody StudentsCourseCreateDto studentsCourseCreateDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(studentsCourseService.saveStudentsCourse(studentsCourseCreateDto));
     }
 
     @Operation(summary = "Изменить информацию студента на курсе")
     @PutMapping("/{id}")
-    public ResponseEntity<StudentsCourseReadDto> updateStudentsCourse(@PathVariable Long id, @RequestBody StudentsCourseCreateDto studentsCourseCreateDto) {
+    public ResponseEntity<StudentsCourseReadDto> updateStudentsCourse(@PathVariable Long id,
+                                                                      @Validated @RequestBody StudentsCourseCreateDto studentsCourseCreateDto) {
         return studentsCourseService.updateStudentsCourse(id, studentsCourseCreateDto)
                 .map(userChatReadDto -> ResponseEntity.ok().body(userChatReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

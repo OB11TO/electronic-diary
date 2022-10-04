@@ -18,7 +18,8 @@ public class TeacherCreateDto {
     String address;
 
     @NotEmpty(message = "Phone cannot be empty")
-    @Pattern(regexp = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$")  //+111 (202) 555-0125
+    @Pattern(regexp = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$", //+111 (202) 555-0125
+            message = "Incorrect phone number")
     String phone;
 
     @NotNull(message = "Payment cannot be empty")
