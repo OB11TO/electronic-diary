@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,13 +45,14 @@ public class CourseController {
 
     @Operation(summary = "Создать новый курс")
     @PostMapping
-    public ResponseEntity<CourseReadDto> createCourse(@RequestBody CourseCreateDto courseCreateDto) {
+    public ResponseEntity<CourseReadDto> createCourse(@Validated @RequestBody CourseCreateDto courseCreateDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(courseService.createCourse(courseCreateDto));
     }
 
     @Operation(summary = "Изменить данные конкретного курса по его id")
     @PutMapping("/{id}")
-    public ResponseEntity<CourseReadDto> updateCourse(@PathVariable Long id, @RequestBody CourseCreateDto courseCreateDto) {
+    public ResponseEntity<CourseReadDto> updateCourse(@PathVariable Long id,
+                                                      @Validated @RequestBody CourseCreateDto courseCreateDto) {
         return courseService.updateCourse(id, courseCreateDto)
                 .map(courseReadDto -> ResponseEntity.ok().body(courseReadDto))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
