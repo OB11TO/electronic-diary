@@ -2,6 +2,7 @@ package ru.ae.coursemodel.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 import ru.ae.coursemodel.entity.Course;
 import ru.ae.coursemodel.entity.Student;
@@ -12,7 +13,8 @@ import java.util.Optional;
 @Repository
 public interface StudentRepository extends
         JpaRepository<Student, Long>,
-        FilterStudentRepository {
+        FilterStudentRepository,
+        QuerydslPredicateExecutor<Student> {
 
     @Query("select c " +
             "from Student s " +
