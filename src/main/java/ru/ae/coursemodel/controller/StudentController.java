@@ -3,6 +3,7 @@ package ru.ae.coursemodel.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import ru.ae.coursemodel.dto.PageResponse;
 import ru.ae.coursemodel.dto.course.CourseReadDto;
 import ru.ae.coursemodel.dto.student.StudentCreateDto;
 import ru.ae.coursemodel.dto.student.StudentFilter;
@@ -56,8 +58,9 @@ public class StudentController {
 
     @Operation(summary = "Получить всех студентов")
     @GetMapping
-    public ResponseEntity<List<StudentReadDto>> findAll() {
-        return ResponseEntity.ok(studentService.findAll());
+    public ResponseEntity<PageResponse<StudentReadDto>> findAll(Pageable pageable) {
+        var page = studentService.findAll(pageable);
+        return ResponseEntity.ok(PageResponse.of(page));
     }
 
     @Operation(summary = "Получить всех студентов с фильтрацией")

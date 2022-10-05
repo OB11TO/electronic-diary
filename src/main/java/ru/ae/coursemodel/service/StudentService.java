@@ -2,6 +2,8 @@ package ru.ae.coursemodel.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ae.coursemodel.dto.course.CourseReadDto;
@@ -46,11 +48,10 @@ public class StudentService {
                 .collect(toList());
     }
 
-    public List<StudentReadDto> findAll() {
+    public Page<StudentReadDto> findAll(Pageable pageable) {
         log.info("Get all students");
-        return studentRepository.findAll().stream()
-                .map(studentReadMapper::map)
-                .collect(toList());
+        return studentRepository.findAll(pageable)
+                .map(studentReadMapper::map);
     }
 
     public List<StudentReadDto> findAll(StudentFilter studentFilter) {
