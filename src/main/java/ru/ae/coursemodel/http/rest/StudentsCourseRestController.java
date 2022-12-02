@@ -1,4 +1,4 @@
-package ru.ae.coursemodel.controller;
+package ru.ae.coursemodel.http.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -27,7 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "StudentsCourse", description = "Студенты на курсах")
 @SecurityRequirement(name = "TaskAPISecureScheme")
-public class StudentsCourseController {
+public class StudentsCourseRestController {
 
     private final StudentsCourseService studentsCourseService;
 
