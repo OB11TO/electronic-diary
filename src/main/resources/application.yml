@@ -10,6 +10,15 @@ spring:
       format_sql: true
     hibernate:
       ddl-auto: none
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: gg
+            clientSecret: gg
+            redirectUri: http://localhost:8080/login/oauth2/code/google
+            scope: openid, email, profile
 
 springdoc:
   version: @springdoc.version@

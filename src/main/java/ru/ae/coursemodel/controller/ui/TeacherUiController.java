@@ -1,4 +1,4 @@
-package ru.ae.coursemodel.controller;
+package ru.ae.coursemodel.controller.ui;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
