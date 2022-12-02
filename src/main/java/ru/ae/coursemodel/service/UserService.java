@@ -1,6 +1,7 @@
 package ru.ae.coursemodel.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -58,6 +59,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
+    @PreAuthorize("hasAuthority('ADMIN')")
     public boolean deleteUser(Long id) {
         return userRepository.findById(id)
                 .map(entity -> {

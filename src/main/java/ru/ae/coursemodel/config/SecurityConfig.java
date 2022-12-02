@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static ru.ae.coursemodel.entity.Role.ADMIN;
+
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
@@ -17,12 +19,17 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(urlConfig -> urlConfig
-                        .antMatchers("/login", "/users/registration", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                        .antMatchers("/login", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                        .antMatchers("/users/registration").hasAuthority(ADMIN.getAuthority())
                         .anyRequest().authenticated()
                 )
-                .httpBasic()
-                .and()
-                .formLogin(login -> login.defaultSuccessUrl("/teachers"));
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .deleteCookies("JSESSIONID"))
+                .formLogin(login -> login
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/teachers"));
 
         return http.build();
     }

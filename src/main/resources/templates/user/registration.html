@@ -12,9 +12,6 @@
     <label for="rawPassword">Password:
         <input id="rawPassword" type="password" name="rawPassword">
     </label><br>
-    <label for="birthDate">BirthDate:
-        <input id="birthDate" type="date" name="birthDate" th:value="*{birthDate}">
-    </label><br>
     <label for="lastname">Lastname:
         <input id="lastname" type="text" name="lastname" th:value="*{lastname}">
     </label><br>
@@ -24,17 +21,6 @@
     <div th:each="role : ${roles}">
         <input th:id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role == user.role}">
         <label th:for="${role}" th:text="${role}">Role name</label>
-    </div>
-    <div>
-        <label for="company">Company:
-            <select id="company" name="companyId">
-                <option th:each="company : ${companies}"
-                        th:value="${company.getId()}"
-                        th:selected="${company.getId() == user.companyId}"
-                        th:text="${company.getName()}">Company
-                </option>
-            </select>
-        </label>
     </div>
     <button type="submit">Registration</button>
 </form>

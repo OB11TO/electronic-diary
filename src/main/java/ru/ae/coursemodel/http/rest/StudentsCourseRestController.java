@@ -1,7 +1,6 @@
 package ru.ae.coursemodel.http.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,7 +25,7 @@ import java.util.List;
 @RequestMapping("/api/v1/students_courses")
 @RequiredArgsConstructor
 @Tag(name = "StudentsCourse", description = "Студенты на курсах")
-@SecurityRequirement(name = "TaskAPISecureScheme")
+//@SecurityRequirement(name = "Basic")
 public class StudentsCourseRestController {
 
     private final StudentsCourseService studentsCourseService;
