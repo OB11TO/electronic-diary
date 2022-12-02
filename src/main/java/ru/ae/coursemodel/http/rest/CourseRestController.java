@@ -1,4 +1,4 @@
-package ru.ae.coursemodel.controller;
+package ru.ae.coursemodel.http.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/courses")
 @Tag(name = "Course", description = "курсы")
-public class CourseController {
+public class CourseRestController {
 
     private final CourseService courseService;
 

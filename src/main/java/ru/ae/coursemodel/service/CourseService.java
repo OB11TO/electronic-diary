@@ -2,6 +2,7 @@ package ru.ae.coursemodel.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ae.coursemodel.dto.course.CourseCreateDto;
@@ -59,6 +60,7 @@ public class CourseService {
     }
 
     @Transactional
+    @PreAuthorize("hasAuthority('ADMIN')")
     public boolean deleteCourse(Long id) {
         log.info("Remove course with id : {}", id);
         return courseRepository.findById(id)

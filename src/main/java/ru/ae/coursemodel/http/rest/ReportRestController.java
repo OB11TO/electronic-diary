@@ -1,4 +1,4 @@
-package ru.ae.coursemodel.controller;
+package ru.ae.coursemodel.http.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/reports")
 @Tag(name = "Report", description = "отчет")
-public class ReportController {
+public class ReportRestController {
 
     private final TeacherReportService teacherReportService;
 

@@ -5,6 +5,7 @@
     <title>Teacher</title>
 </head>
 <body>
+<div th:insert="~{fragment :: header}"></div>
 <form th:action="@{/teachers/{teacherId}/update(teacherId=${teacher.id})}" method="post" th:object="${teacher}">
     <label for="name">Name:
         <input id="name" type="text" name="name" th:value="*{name}">

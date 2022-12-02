@@ -1,4 +1,4 @@
-package ru.ae.coursemodel.controller;
+package ru.ae.coursemodel.http.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +22,7 @@ import ru.ae.coursemodel.service.TeacherService;
 @Controller
 @RequestMapping("/teachers")
 @RequiredArgsConstructor
-public class TeacherUiController {
+public class TeacherController {
 
     private final TeacherService teacherService;
 

@@ -3,6 +3,7 @@ package ru.ae.coursemodel.service;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -60,6 +61,7 @@ public class StudentsCourseService {
     }
 
     @Transactional
+    @PreAuthorize("hasAuthority('ADMIN')")
     public boolean deleteStudentsCourse(Long id) {
         log.info("Remove StudentsCourse with id : {}", id);
         return studentsCourseRepository.findById(id)
