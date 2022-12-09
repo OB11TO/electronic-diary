@@ -26,6 +26,7 @@ public class CourseService {
     private final CourseReadMapper courseReadMapper;
     private final CourseCreateMapper courseCreateMapper;
 
+    @PreAuthorize("hasAuthority('ADMIN')") //тест
     public List<CourseReadDto> findAll() {
         log.info("Get all courses");
         return courseRepository.findAll().stream()
