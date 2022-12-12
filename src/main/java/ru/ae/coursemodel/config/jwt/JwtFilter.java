@@ -25,12 +25,20 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtProvider jwtProvider;
     private final UserService userService;
+    private final BlacklistTokenService blacklistTokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+        final String bearer = request.getHeader(HttpHeaders.AUTHORIZATION);
+
+        if(blacklistTokenService.isTokenExistInBlacklist(bearer)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         final String token = getTokenFromRequest(request);
+
         if (token != null && jwtProvider.validateAccessToken(token)) {
             var accessClaims = jwtProvider.getAccessClaims(token);
             var username = accessClaims.getSubject();
